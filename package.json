@@ -1,0 +1,17 @@
+{
+  "name": "prime_group_nd_01",
+  "version": "1.0.0",
+  "description": "Project and employee generator",
+  "main": "server.js",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Group!",
+  "license": "ISC"
+}
