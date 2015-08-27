@@ -6,7 +6,6 @@ function scrumrandomInt(max, min){
 };
 
 exporter.scrumPoints = function() {
-  console.log('scrumPoints run');
   var scrumPoints = scrumrandomInt(9, 1);
   return scrumPoints
 }

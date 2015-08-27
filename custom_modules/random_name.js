@@ -16,9 +16,7 @@ randomName.randomInt = function(max, min){
   return Math.floor(Math.random() * (max - min) + min);
 };
 randomName.Employee = function() {
-  console.log('run');
   this.name = (randomName.firstNames[randomName.randomInt(randomName.firstNames.length)] + " " + randomName.lastNames[randomName.randomInt(randomName.lastNames.length)]);
-  console.log(this.name);
   this.skillset = skillGen.skillSet();
   this.scrumpts = scrumPoints.scrumPoints();
 };

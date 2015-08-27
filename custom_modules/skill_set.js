@@ -8,7 +8,6 @@ function skillRandomInt(max, min){
 
 skillGen.titles = ['Front-End', 'Client-Side', 'Server-Side'];
 skillGen.skillSet = function(){
-  console.log('skillset run');
   var emp = skillGen.titles[skillRandomInt(skillGen.titles.length)];
   return emp;
 };
