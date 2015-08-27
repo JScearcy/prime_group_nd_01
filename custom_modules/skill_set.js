@@ -1,4 +1,3 @@
-var randomInt = require('./random_name.js');
 var skillGen = {};
 
 function skillRandomInt(max, min){

@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var $content = $('#content');
 	var project = {};
 	$('#generate').on('click', function(e){
+		$(this).blur();
 		$content.empty();
 		e.preventDefault();
 		project = new Project();
@@ -11,10 +12,12 @@ $(document).ready(function(){
 		});
 	//when the produced button is clicked this will query the server which will return an employee - this will push the data to the correct array after reception.
 	$content.on('click', '#assignEmp', function() {
-			employeeCall();
-			$('#assignEmp').attr({id: 'additionalEmp'}).text('Add Staff');
+		$(this).blur();
+		employeeCall();
+		$('#assignEmp').attr({id: 'additionalEmp'}).text('Add Staff');
 	});
 	$content.on('click', '#additionalEmp', function(){
+		$(this).blur();
 		additionalEmployee();
 	});
 //project generators using a random number from the two arrays
@@ -94,7 +97,6 @@ $(document).ready(function(){
 					totalPoints();
 					sprintTime();
 					displaySprint();
-					console.log(project);
 				}
 		}).fail(function(){
 			console.log('Ajax request failed');
