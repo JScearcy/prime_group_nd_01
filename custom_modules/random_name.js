@@ -2,11 +2,11 @@ var skillGen = require('./skill_set');
 var scrumPoints = require('./scrum_points');
 var randomName = {};
 
-randomName.firstNames = ['David', 'John', 'Andrew', 'James', 'Christopher', 'Paul', 'Steven', 'Kevin', 'Robert', 'Scott',
-              'Craig','Michael', 'Mark', 'Stuart', 'Stephen', 'Alan', 'William', 'Gary', 'Ross', 'Colin',
-              'Brian', 'Barry', 'Richard', 'Martin', 'Thomas', 'Neil', 'Peter', 'Iain', 'Graeme', 'Ian', 'Gordon',
-              'Alexander', 'Ryan', 'Derek', 'Kenneth', 'Allan', 'Jamie', 'Graham', 'Gavin', 'Darren',
-              'Stewart', 'Jonathan', 'Daniel', 'Douglas', 'Grant', 'Lee', 'George', 'Joseph', 'Simon', 'Jake'];
+randomName.firstNames = ['David', 'Katie', 'Andrew', 'Erin', 'Christopher', 'Liz', 'Steven', 'Patty', 'Robert', 'Amy',
+             'Craig','Michael', 'Mark', 'Stuart', 'Stephen', 'Alan', 'William', 'Gary', 'Ross', 'Colin',
+             'Brian', 'Anna', 'Richard', 'Jenny', 'Thomas', 'Ashley', 'Peter', 'Alex', 'Graeme', 'Madison', 'Gordon',
+             'Maggie', 'Ryan', 'Julie', 'Kenneth', 'Jean', 'Jamie', 'Kamie', 'Gavin', 'Kelly',
+             'Stewart', 'Jane', 'Daniel', 'Ashley', 'Grant', 'Laurie', 'George', 'Stacey', 'Simon', 'Jake'];
 randomName.lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Garcia', 'Rodriguez', 'Wilson', 'Martinez',
             'Anderson', 'Taylor', 'Thomas', 'Hernandez', 'Moore', 'Martin', 'Jackson', 'Thompson', 'White', 'Lopez', 'Lee',
             'Gonzalez', 'Harris', 'Clark', 'Lewis', 'Robinson', 'Walker', 'Perez', 'Hall', 'Young', 'Allen', 'Sanchez', 'Wright', 'King',
