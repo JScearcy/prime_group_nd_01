@@ -3,15 +3,19 @@ $(document).ready(function(){
 	var $content = $('#content');
 	var project = {};
 	$('#generate').on('click', function(e){
+		$content.empty();
 		e.preventDefault();
 		project = new Project();
-		console.log(project);
+
 		displayProject(project);
 		});
 	//when the produced button is clicked this will query the server which will return an employee - this will push the data to the correct array after reception.
 	$content.on('click', '#assignEmp', function() {
 			employeeCall();
-			$(this).hide();
+			$('#assignEmp').attr({id: 'additionalEmp'}).text('Add Staff');
+	});
+	$content.on('click', '#additionalEmp', function(){
+		additionalEmployee();
 	});
 //project generators using a random number from the two arrays
 	companyName1 = ['Blue', 'Green', 'Yellow', 'Orange', 'Pink', 'Hairy','Fuzzy','Silly','Crazy','Sleepy','Angry','Melancholy','Hungry','Thirsty','Ugly','Turqoise','Lime Green','Magenta'];
@@ -24,20 +28,25 @@ $(document).ready(function(){
 	};
 //this displays the project object on to the DOM
 	function displayProject(object){
-		$content.empty();
 		var $newProjectDiv = $('<div>');
 		var $newH1 = $('<h1>');
 		var $newul = $('<ul>');
 		var $newFrontli = $('<li>');
+		var $newFrontP = $('<p>');
 		var $newClientli = $('<li>');
+		var $newClientP = $('<p>');
 		var $newServerli = $('<li>');
-		var $newEmployeeButton = $('<button>').attr({id: "assignEmp"}).text('Assign Employees');
+		var $newServerP = $('<p>');
+		var $newEmployeeButton = $('<button>').attr({id: "assignEmp", class: 'btn btn-primary btn-lg active'}).text('Assign Staff');
 		$newH1.text(object.projectName);
-		$newFrontli.text('Front-End Points: '+object.frontEnd.frontendPoints).attr({id: 'Front-End'});
-		$newClientli.text('Client-Side Points: '+object.clientSide.clientSidePoints).attr({id: 'Client-Side'});
-		$newServerli.text('Server-Side Points: '+object.serverSide.serverSidePoints).attr({id: 'Server-Side'});
+		$newFrontP.text('Front-End Points: '+object.frontEnd.frontendPoints);
+		$newClientP.text('Client-Side Points: '+object.clientSide.clientSidePoints);
+		$newServerP.text('Server-Side Points: '+object.serverSide.serverSidePoints);
+		$newFrontli.attr({id: 'Front-End', class:'frontend points'}).append($newFrontP);
+		$newClientli.attr({id: 'Client-Side', class: 'clientSide points'}).append($newClientP);
+		$newServerli.attr({id: 'Server-Side', class: 'serverSide points'}).append($newServerP);
 
-		$newul.append($newFrontli).append($newClientli).append($newServerli);
+		$newul.attr({class: 'skillset'}).append($newFrontli).append($newClientli).append($newServerli);
 		$newProjectDiv.append($newH1);
 		$newProjectDiv.append($newul).append($newEmployeeButton);
 		$content.append($newProjectDiv);
@@ -47,9 +56,8 @@ $(document).ready(function(){
 		var $newEmpName = $('<li>');
 		var $newEmpskillset = $('<li>');
 		var $newEmpScrum = $('<li>');
-		$newEmpName.text('Name: ' + object.name + ' ');
-		$newEmpskillset.text(' Skillset: ' + object.skillset);
-		$newEmpScrum.text(' Scrum Points: ' + object.scrumpts);
+		$newEmpName.attr({class: 'empName employee'}).text(object.name + ', ');
+		$newEmpScrum.attr({class: 'empScrumpts employee'}).text(' Scrum Points: ' + object.scrumpts);
 		$newul.attr({class: 'EmployeeList'}).append($newEmpName).append($newEmpskillset).append($newEmpScrum);
 		return $newul;
 	}
@@ -92,7 +100,40 @@ $(document).ready(function(){
 			console.log('Ajax request failed');
 			});
 	};
-
+	function additionalEmployee(){
+		$.ajax({
+			type: 'GET',
+			url: '/NewEmployee'
+		}).always(function(){
+		}).done(function(data){
+				switch (data.skillset){
+					case 'Front-End':
+						project.frontEnd.frontEndEmployees.push(data);
+						break;
+					case 'Client-Side':
+						project.clientSide.clientSideEmployees.push(data);
+						break;
+					case 'Server-Side':
+						project.serverSide.serverSideEmployees.push(data);
+						break;
+				}
+				$content.empty();
+				displayProject(project);
+				$('#assignEmp').attr({id: 'additionalEmp'}).text('Add Staff');
+				project.frontEnd.frontEndEmployees.forEach(function(object){
+					$('#Front-End').append(displayEmployees(object));
+				});
+				project.serverSide.serverSideEmployees.forEach(function(object){
+					$('#Server-Side').append(displayEmployees(object));
+				});
+				project.clientSide.clientSideEmployees.forEach(function(object){
+					$('#Client-Side').append(displayEmployees(object));
+				});
+				totalPoints();
+				sprintTime();
+				displaySprint();
+			}).fail(function(){});
+		};
 //random number generator
 	function randomNumber(min, max) {
 		return Math.floor(Math.random() * (1 + max - min) + min);
@@ -114,12 +155,11 @@ $(document).ready(function(){
 		project.sprintTime.push(project.frontEnd.frontendPoints / project.frontEnd.frontEndEmployees.totalPts);
 		project.sprintTime.push(project.clientSide.clientSidePoints / project.clientSide.clientSideEmployees.totalPts);
 		project.sprintTime.push(project.serverSide.serverSidePoints / project.serverSide.serverSideEmployees.totalPts);
-		console.log(project.sprintTime);
 		project.sprintTime = Math.ceil(Math.max.apply(null, project.sprintTime));
 	}
 	function displaySprint(){
 		$sprintDiv = $('<div>');
 		$sprintH1 = $('<h1>');
-		$content.append($sprintDiv.append($sprintH1.text('Estimated project time: ' + (project.sprintTime * 2) + ' weeks.')));
+		$content.append($sprintDiv.attr({class: 'sprintTime'}).append($sprintH1.attr({class: 'sprintHeader'}).text('Estimated Project Time: ' + (project.sprintTime * 2) + ' Weeks!')));
 	}
 });

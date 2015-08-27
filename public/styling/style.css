@@ -1,0 +1,30 @@
+body {
+    background-color: #514346;
+    color: white;
+    text-align: center;
+}
+
+#generate, #assignEmp, #additionalEmp {
+    background-color: #5E607A;
+}
+ul .EmployeeList {
+  padding: 0;
+}
+.EmployeeList li {
+    display: inline;
+    font-size: 15px;
+}
+.skillset {
+    list-style-type: none;
+    padding: 0;
+}
+.points {
+    margin: 40px;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+p{
+  text-align: center;
+}
